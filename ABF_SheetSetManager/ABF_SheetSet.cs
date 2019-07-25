@@ -47,8 +47,9 @@ namespace ABF_SheetSetManager
             // User Input: editor equals command line
             // To talk to the user you use the command line, aka the editor
             Editor ed = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
+
             PromptStringOptions pso = new PromptStringOptions("\nHello Nadia! \nWhat Sheet Set would you like to open?");
-            pso.DefaultValue = @"C:\Users\Robert\Documents\AutoCAD Sheet Sets\Expedia.dst";
+            pso.DefaultValue = @"C:\Users\rhale\Documents\AutoCAD Sheet Sets\Squid666.dst";
             pso.UseDefaultValue = true;
             pso.AllowSpaces = true;
             PromptResult pr = ed.GetString(pso);
@@ -76,11 +77,22 @@ namespace ABF_SheetSetManager
             // User Input: editor equals command line
             // To talk to the user you use the command line, aka the editor
             Editor ed = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
-            PromptStringOptions pso = new PromptStringOptions("\nHello Nadia! \nWhere  would you like to save the new Sheet Set?");
+
+            PromptResult pr = ed.GetFileNameForSave("Hello Nadia, Where would you would like to save the new Sheet Set?");
+
+            PromptStringOptions pso = new PromptStringOptions("\nHello Nadia! \nWhat will be the name of the new Sheet Set?");
+            pso.AllowSpaces = true;
+            PromptResult prSheetSetName = ed.GetString(pso);
+
+            PromptStringOptions psoDescription = new PromptStringOptions("\nHello Nadia! \nWhat will be the description of the new Sheet Set?");
+            psoDescription.AllowSpaces = true;
+            PromptResult prSheetSetDescription = ed.GetString(psoDescription);
+
+
             //pso.DefaultValue = @"C:\Users\Robert\Documents\AutoCAD Sheet Sets\Expedia.dst";
             //pso.UseDefaultValue = true;
-            pso.AllowSpaces = true;
-            PromptResult pr = ed.GetString(pso);
+
+            // works...
 
             // Get a reference to the Sheet Set Manager object 
             IAcSmSheetSetMgr sheetSetManager = new AcSmSheetSetMgr();
@@ -96,8 +108,11 @@ namespace ABF_SheetSetManager
             if (LockDatabase(ref sheetSetDatabase, true) == true)
             {
                 // Set the name and description of the sheet set 
-                sheetSet.SetName("ExpediaSheetSetTest");
-                sheetSet.SetDesc("Aluminum Bronze Fabricator's Sheet Set Object Demo");
+                //sheetSet.SetName("ExpediaSheetSetTest");
+                sheetSet.SetName(prSheetSetName.StringResult);
+
+                //sheetSet.SetDesc("Aluminum Bronze Fabricator's Sheet Set Object Demo");
+                sheetSet.SetDesc(prSheetSetDescription.StringResult);
 
                 // Unlock the database 
                 LockDatabase(ref sheetSetDatabase, false);
@@ -159,16 +174,21 @@ namespace ABF_SheetSetManager
 
         // Create a new sheet set with custom subsets
         [CommandMethod("ABF_CreateSheetSetWithSubsets")]
-        public void CreateSheetSet_AddSubset()
+        public void CreateSheetSet_WithSubset()
         {
             // User Input: editor equals command line
             // To talk to the user you use the command line, aka the editor
             Editor ed = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
-            PromptStringOptions pso = new PromptStringOptions("\nHello Nadia! \nWhere  would you like to save the new Sheet Set?");
-            //pso.DefaultValue = @"C:\Users\Robert\Documents\AutoCAD Sheet Sets\Expedia.dst";
-            //pso.UseDefaultValue = true;
+
+            PromptResult pr = ed.GetFileNameForSave("Hello Nadia, Where would you would like to save the new Sheet Set?");
+
+            PromptStringOptions pso = new PromptStringOptions("\nHello Nadia! \nWhat will be the name of the new Sheet Set?");
             pso.AllowSpaces = true;
-            PromptResult pr = ed.GetString(pso);
+            PromptResult prSheetSetName = ed.GetString(pso);
+
+            PromptStringOptions psoDescription = new PromptStringOptions("\nHello Nadia! \nWhat will be the description of the new Sheet Set?");
+            psoDescription.AllowSpaces = true;
+            PromptResult prSheetSetDescription = ed.GetString(psoDescription);
 
             // Get a reference to the Sheet Set Manager object 
             IAcSmSheetSetMgr sheetSetManager = new AcSmSheetSetMgr();
@@ -184,8 +204,8 @@ namespace ABF_SheetSetManager
             if (LockDatabase(ref sheetSetDatabase, true) == true)
             {
                 // Set the name and description of the sheet set 
-                sheetSet.SetName("CP318-4");
-                sheetSet.SetDesc("AU2009 Sheet Set Object Demo");
+                sheetSet.SetName(prSheetSetName.StringResult);
+                sheetSet.SetDesc(prSheetSetDescription.StringResult);
 
                 // Create two new subsets 
                 AcSmSubset subset = default(AcSmSubset);
@@ -284,6 +304,9 @@ namespace ABF_SheetSetManager
             // User Input: editor equals command line
             // To talk to the user you use the command line, aka the editor
             Editor ed = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
+
+            PromptResult pr1 = ed.GetFileNameForOpen("Hello Nadia, Please select the Sheet Set you would like to edit.");
+
             PromptStringOptions pso = new PromptStringOptions("\nHello Nadia! \nWhat version # is the drawing at?");
             //pso.DefaultValue = @"C:\Users\Robert\Documents\AutoCAD Sheet Sets\Expedia.dst";
             //pso.UseDefaultValue = true;
@@ -295,8 +318,6 @@ namespace ABF_SheetSetManager
             pr = ed.GetString(pso);
             string versionIssueDate = pr.StringResult;
 
-            pr = ed.GetFileNameForOpen("What is the Sheet Set you want to modify? Full address please.");
-
             // Get a reference to the Sheet Set Manager object 
             IAcSmSheetSetMgr sheetSetManager = new AcSmSheetSetMgr();
 
@@ -307,7 +328,8 @@ namespace ABF_SheetSetManager
             // Open a Sheet Set file 
             AcSmDatabase sheetSetDatabase = default(AcSmDatabase);
             //sheetSetDatabase = sheetSetManager.OpenDatabase("C:\\Program Files\\AutoCAD 2010\\Sample\\Sheet Sets\\Architectural\\IRD Addition.dst", false); 
-            sheetSetDatabase = sheetSetManager.OpenDatabase(@"C:\Users\rhale\Documents\AutoCAD Sheet Sets\Expedia.dst", false);
+            //sheetSetDatabase = sheetSetManager.OpenDatabase(@"C:\Users\rhale\Documents\AutoCAD Sheet Sets\Expedia.dst", false);
+            sheetSetDatabase = sheetSetManager.OpenDatabase(pr1.StringResult, false);
 
             // Get the sheet set from the database 
             AcSmSheetSet sheetSet = sheetSetDatabase.GetSheetSet();
@@ -615,8 +637,6 @@ namespace ABF_SheetSetManager
             // Set the Prompt for Template option of the subset 
             sheetSetDatabase.GetSheetSet().SetPromptForDwt(promptForDWT);
         }
-
-        
 
     }
 }
