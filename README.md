@@ -11,10 +11,12 @@ Once AutoCAD is configured, this can be used with the Sheet Set Manager API to b
 This was completed in 2019, AutoCAD may have created similar functionality by now.
 
 Open Sheet Set Manager
-![alt text](https://github.com/FrostyDesigner/SheetSetManagerPlugIn/blob/master/SheetSet1.png", "Logo Title Text 1")
+![alt text](https://github.com/FrostyDesigner/SheetSetManagerPlugIn/blob/master/SheetSet1.png")
 
-Open Sheet Set Manager
-![alt text](https://github.com/FrostyDesigner/SheetSetManagerPlugIn/blob/master/SheetSet2.png, "Logo Title Text 1")
+Open or Create Sheet Set
+![alt text](https://github.com/FrostyDesigner/SheetSetManagerPlugIn/blob/master/SheetSet2.png)
 
-Open Sheet Set Manager
-![alt text](https://github.com/FrostyDesigner/SheetSetManagerPlugIn/blob/master/SheetSet3.png, "Logo Title Text 1")
+Review The Page Numbers
+![alt text](https://github.com/FrostyDesigner/SheetSetManagerPlugIn/blob/master/SheetSet3.png)
+
+This plugin curently renames the sheet numbers based on user provided parameters instead of user needing to rename sheets one at a time. 
