@@ -9,12 +9,3 @@ It is necesary to have a fully licensed version of AutoCAD installed and configu
 Once AutoCAD is configured, this can be used with the Sheet Set Manager API to batch renames sheets instead of one at a time.
 
 This was completed in 2019, AutoCAD may have created similar functionality by now.
-
-Open Sheet Set Manager
-![alt text](https://github.com/FrostyDesigner/SheetSetManagerPlugIn/blob/master/SheetSet1.png)
-
-Open Sheet Set Manager
-![alt text](https://github.com/FrostyDesigner/SheetSetManagerPlugIn/blob/master/SheetSet2.png)
-
-Open Sheet Set Manager
-![alt text](https://github.com/FrostyDesigner/SheetSetManagerPlugIn/blob/master/SheetSet3.png)
