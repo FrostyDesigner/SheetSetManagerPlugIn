@@ -20,3 +20,5 @@ Review The Page Numbers
 ![alt text](https://github.com/FrostyDesigner/SheetSetManagerPlugIn/blob/master/SheetSet3.png)
 
 This plugin curently renames the sheet numbers based on user provided parameters instead of user needing to rename sheets one at a time. 
+
+This concludes the scope of this customer request so no further functionality was added. Howver the connection to AutoCAD Sheet Set Manager has been established so additional tools could be added with minimal effort. 
