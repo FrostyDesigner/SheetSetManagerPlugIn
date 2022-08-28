@@ -11,7 +11,7 @@ Once AutoCAD is configured, this can be used with the Sheet Set Manager API to b
 This was completed in 2019, AutoCAD may have created similar functionality by now.
 
 Open Sheet Set Manager
-![alt text](https://github.com/FrostyDesigner/SheetSetManagerPlugIn/blob/master/SheetSet1.png")
+![alt text](https://github.com/FrostyDesigner/SheetSetManagerPlugIn/blob/master/SheetSet1.png)
 
 Open or Create Sheet Set
 ![alt text](https://github.com/FrostyDesigner/SheetSetManagerPlugIn/blob/master/SheetSet2.png)
